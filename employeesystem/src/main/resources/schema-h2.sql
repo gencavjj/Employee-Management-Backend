@@ -1,11 +1,12 @@
-DROP TABLE EMPLOYEE;
+CREATE TABLE employee (
+employee_id NUMBER(10,0) NOT NULL AUTO_INCREMENT,
+first_name VARCHAR2(255) DEFAULT NULL,
+last_name VARCHAR2(255) DEFAULT NULL,
+email_address VARCHAR(255),
+PRIMARY KEY (employee_id));
 
-CREATE TABLE EMPLOYEE(
-EMPLOYEE_ID NUMBER(10,0) NOT NULL AUTO_INCREMENT,
-FIRST_NAME VARCHAR2(255) DEFAULT NULL,
-LAST_NAME VARCHAR2(255) DEFAULT NULL,
-EMAIL_ADDRESS VARCHAR(255)
-PRIMARY KEY (ID));
+INSERT INTO employee (first_name, last_name, email_address) VALUES ('Dennis', 'Kalaygian', 'dennis@gmail.com');
+INSERT INTO employee (first_name, last_name, email_address) VALUES ('Jeremy', 'Gencavage', 'jeremy@gmail.com');
 
 DROP SEQUENCE hibernate_sequence;
 
