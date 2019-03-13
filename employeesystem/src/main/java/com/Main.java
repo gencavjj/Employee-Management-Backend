@@ -1,4 +1,4 @@
-package com.api;
+package com;
 
 import org.apache.catalina.servlets.WebdavServlet;
 import org.springframework.boot.SpringApplication;

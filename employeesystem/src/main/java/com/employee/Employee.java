@@ -1,4 +1,4 @@
-package com.api;
+package com.employee;
 
 import javax.persistence.*;
 import java.io.Serializable;
