@@ -7,9 +7,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -31,7 +31,6 @@ public class TestEmployeeService {
         employeeId = 1;
         employee = new Employee();
         employees = new ArrayList<>();
-
         employees.add(employee);
 
         employeeService = new EmployeeService(employeeRepository);
@@ -52,11 +51,11 @@ public class TestEmployeeService {
     @Test
     public void testFindEmployee() {
 
-        when(employeeRepository.findById(employeeId)).thenReturn(employee);
+        when(employeeRepository.findById(employeeId)).thenReturn(java.util.Optional.ofNullable(employee));
 
-        Assert.assertEquals("There was an error getting the employees", employee,employee);
+        Employee returnedEmployee = employeeService.findEmployee(employeeId);
 
-
+        Assert.assertEquals("There was an error finding the employee", employee, returnedEmployee);
     }
 
     @Test(expected = RuntimeException.class)
