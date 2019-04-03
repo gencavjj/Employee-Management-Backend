@@ -51,10 +51,13 @@ public class TestEmployeeService {
     @Test
     public void testFindEmployee() {
 
+        //given
         when(employeeRepository.findById(employeeId)).thenReturn(java.util.Optional.ofNullable(employee));
 
+        //when
         Employee returnedEmployee = employeeService.findEmployee(employeeId);
 
+        //then
         Assert.assertEquals("There was an error finding the employee", employee, returnedEmployee);
     }
 
