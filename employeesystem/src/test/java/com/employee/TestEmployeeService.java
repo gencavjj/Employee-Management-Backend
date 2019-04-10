@@ -40,10 +40,13 @@ public class TestEmployeeService {
     @Test
     public void testFindEmployees() {
 
+        //given
         when(employeeRepository.findAll()).thenReturn(employees);
 
+        //when
         List<Employee> returnedEmployees = employeeService.findEmployees();
 
+        //then
         Assert.assertEquals("There was an error getting the employees", employees, returnedEmployees);
 
     }
