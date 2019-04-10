@@ -1,10 +1,13 @@
 package com.employee;
 
+import org.hibernate.annotations.common.util.impl.Log;
+import org.hibernate.annotations.common.util.impl.Log_$logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 public class EmployeeController {
@@ -31,6 +34,13 @@ public class EmployeeController {
     public ResponseEntity<Employee> findEmployee(@PathVariable("employee-id") int employeeId) {
         Employee employee = employeeService.findEmployee(employeeId);
         return new ResponseEntity<>(employee, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/api/employees/{employee-id}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable("employee-id") int employeeId) {
+        employeeService.deleteEmployee(employeeId);
+        return new ResponseEntity(HttpStatus.OK);
+
     }
 
 }
