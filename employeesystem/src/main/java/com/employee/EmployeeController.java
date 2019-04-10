@@ -2,9 +2,7 @@ package com.employee;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +13,12 @@ public class EmployeeController {
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
+    }
+
+    @PostMapping("/api/employees")
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+        Employee createdEmployee = employeeService.createEmployee(employee);
+        return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
     }
 
     @GetMapping("/api/employees")
