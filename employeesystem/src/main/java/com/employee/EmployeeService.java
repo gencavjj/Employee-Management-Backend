@@ -10,6 +10,7 @@ public class EmployeeService {
 
     public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
+
     }
 
     Employee createEmployee(Employee employee) { return employeeRepository.save(employee); }
@@ -22,9 +23,12 @@ public class EmployeeService {
         return employeeRepository.findById(employeeId).orElseThrow(() -> new RuntimeException("Employee does not exist"));
     }
 
-    Employee updateEmployee(Employee employee) { return  employeeRepository.save(employee); }
+    Employee updateEmployee(int employeeId, Employee employee) {
+        employee.setEmployeeId(employeeId);
+        return employeeRepository.save(employee);
+    }
 
-    public void deleteEmployee(int employeeId) {
+    void deleteEmployee(int employeeId) {
         if (employeeRepository.existsById(employeeId)) {
             employeeRepository.deleteById(employeeId);
         }
