@@ -23,12 +23,12 @@ public class EmployeeService {
         return employeeRepository.findById(employeeId).orElseThrow(() -> new RuntimeException("Employee does not exist"));
     }
 
-    public Employee updateEmployee(int employeeId, Employee employee) {
+    Employee updateEmployee(int employeeId, Employee employee) {
         employee.setEmployeeId(employeeId);
         return employeeRepository.save(employee);
     }
 
-    public void deleteEmployee(int employeeId) {
+    void deleteEmployee(int employeeId) {
         if (employeeRepository.existsById(employeeId)) {
             employeeRepository.deleteById(employeeId);
         }

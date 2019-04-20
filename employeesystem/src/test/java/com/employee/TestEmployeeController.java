@@ -1,21 +1,12 @@
 package com.employee;
 
-<<<<<<< HEAD
 
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestEmployeeController {
-
-    private int employeeId;
-=======
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -25,9 +16,9 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-
 public class TestEmployeeController {
 
     private int employeeId;
@@ -36,18 +27,17 @@ public class TestEmployeeController {
 
     @Mock
     private EmployeeService employeeService;
+
     private EmployeeController employeeController;
 
     @Before
     public void init() {
-
         employeeId = 1;
         employee = new Employee();
         employees = new ArrayList<>();
         employees.add(employee);
 
         employeeController = new EmployeeController(employeeService);
-
     }
 
     //Testing the createEmployee method
@@ -76,7 +66,6 @@ public class TestEmployeeController {
 
         //then
         assertEquals("There was an error finding the employees", predictedResponse, actualResponse);
-
     }
 
     //Testing the findEmployee method (find by Id)
@@ -91,8 +80,6 @@ public class TestEmployeeController {
 
         //then
         assertEquals("There was an error finding the employee", actualResponse, predictedResponse);
-
-
     }
 
     //Testing the updateEmployee method
@@ -107,7 +94,6 @@ public class TestEmployeeController {
 
         //then
         assertEquals("There was an error updating the employee", actualResponse, predictedResponse);
-
     }
 
     //Testing the deleteEmployee method
@@ -120,9 +106,17 @@ public class TestEmployeeController {
         ResponseEntity<?> actualResponse = employeeController.deleteEmployee(employeeId);
 
         //then
-        Mockito.verify(employeeService, times(1)).deleteEmployee(employeeId);
-
+        verify(employeeService, times(1)).deleteEmployee(employeeId);
     }
->>>>>>> 1facac95d33d4dfad5911d6691b259aba3f7120f
+
+    //Testing that the employee is deleted
+    @Test
+    public void testDeleteEmployee_employeeIsDeleted() {
+        //when
+        employeeController.deleteEmployee(employeeId);
+
+        //then
+        verify(employeeService, times(1)).deleteEmployee(employeeId);
+    }
 
 }

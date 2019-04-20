@@ -48,7 +48,6 @@ public class EmployeeController {
     public ResponseEntity<?> deleteEmployee(@PathVariable("employeeId") int employeeId) {
         employeeService.deleteEmployee(employeeId);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
 }
