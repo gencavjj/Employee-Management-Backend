@@ -13,17 +13,17 @@ public class EmployeeService {
 
     }
 
-    Employee createEmployee(Employee employee) { return employeeRepository.save(employee); }
+    EmployeeModel createEmployee(EmployeeModel employee) { return employeeRepository.save(employee); }
 
-    List<Employee> findEmployees() {
+    List<EmployeeModel> findEmployees() {
         return employeeRepository.findAll();
     }
 
-    Employee findEmployee(int employeeId) {
-        return employeeRepository.findById(employeeId).orElseThrow(() -> new RuntimeException("Employee does not exist"));
+    EmployeeModel findEmployee(int employeeId) {
+        return employeeRepository.findById(employeeId).orElseThrow(() -> new RuntimeException("EmployeeModel does not exist"));
     }
 
-    Employee updateEmployee(int employeeId, Employee employee) {
+    EmployeeModel updateEmployee(int employeeId, EmployeeModel employee) {
         employee.setEmployeeId(employeeId);
         return employeeRepository.save(employee);
     }
