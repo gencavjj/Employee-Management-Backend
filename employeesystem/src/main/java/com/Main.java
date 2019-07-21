@@ -1,6 +1,6 @@
 package com;
 
-import org.apache.catalina.servlets.WebdavServlet;
+import org.h2.server.web.WebServlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -14,8 +14,8 @@ public class Main {
     }
 
     @Bean
-    ServletRegistrationBean h2ServletRegistration() {
-        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebdavServlet());
+    ServletRegistrationBean h2servletRegistration() {
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
         registrationBean.addUrlMappings("/console/*");
         return registrationBean;
     }
