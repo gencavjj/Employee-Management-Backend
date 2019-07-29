@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Table(name = "NOTE")
 public class Note implements Serializable {
 
-    private static final long serialVersionUID = 7548395543L;
+    private static final long serialVersionUID = 432789457849L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 
-public class TestEmployeeService {
+public class TestEmployeeServiceImpl {
 
     private int employeeId;
     private Employee employee;
@@ -24,7 +24,7 @@ public class TestEmployeeService {
     @Mock
     private EmployeeRepository employeeRepository;
 
-    private EmployeeService employeeService;
+    private EmployeeServiceImpl employeeServiceImpl;
 
     @Before
     public void init() {
@@ -34,7 +34,7 @@ public class TestEmployeeService {
         employees = new ArrayList<>();
         employees.add(employee);
 
-        employeeService = new EmployeeService(employeeRepository);
+        employeeServiceImpl = new EmployeeServiceImpl(employeeRepository);
 
     }
 
@@ -44,7 +44,7 @@ public class TestEmployeeService {
         when(employeeRepository.save(employee)).thenReturn(employee);
 
         //when
-        Employee createdEmployee = employeeService.createEmployee(employee);
+        Employee createdEmployee = employeeServiceImpl.createEmployee(employee);
 
         //then
         Assert.assertEquals("There was an error creating an employee", employee, createdEmployee);
@@ -56,7 +56,7 @@ public class TestEmployeeService {
         when(employeeRepository.findAll()).thenReturn(employees);
 
         //when
-        List<Employee> returnedEmployees = employeeService.findEmployees();
+        List<Employee> returnedEmployees = employeeServiceImpl.findEmployees();
 
         //then
         Assert.assertEquals("There was an error getting the employees", employees, returnedEmployees);
@@ -68,7 +68,7 @@ public class TestEmployeeService {
         when(employeeRepository.findById(employeeId)).thenReturn(Optional.of(employee));
 
         //when
-        Employee returnedEmployee = employeeService.findEmployee(employeeId);
+        Employee returnedEmployee = employeeServiceImpl.findEmployee(employeeId);
 
         //then
         Assert.assertEquals("There was an error finding the employee", employee, returnedEmployee);
@@ -79,7 +79,7 @@ public class TestEmployeeService {
 
         when(employeeRepository.findById(employeeId)).thenReturn(null);
 
-        employeeService.findEmployee(employeeId);
+        employeeServiceImpl.findEmployee(employeeId);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class TestEmployeeService {
         when(employeeRepository.save(employee)).thenReturn(employee);
 
         //when
-        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
+        Employee updatedEmployee = employeeServiceImpl.updateEmployee(employeeId, employee);
 
         //then
         Assert.assertEquals("There was an error updating the employee", employee, updatedEmployee);
@@ -100,7 +100,7 @@ public class TestEmployeeService {
         when(employeeRepository.save(employee)).thenReturn(employee);
 
         //when
-        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
+        Employee updatedEmployee = employeeServiceImpl.updateEmployee(employeeId, employee);
         int updatedEmployeeId = updatedEmployee.getEmployeeId();
 
         //then
@@ -113,7 +113,7 @@ public class TestEmployeeService {
         when(employeeRepository.existsById(employeeId)).thenReturn(true);
 
         //when
-        employeeService.deleteEmployee(employeeId);
+        employeeServiceImpl.deleteEmployee(employeeId);
 
         //then
         verify(employeeRepository, times(1)).deleteById(employeeId);
@@ -125,7 +125,7 @@ public class TestEmployeeService {
         when(employeeRepository.existsById(employeeId)).thenReturn(false);
 
         //when
-        employeeService.deleteEmployee(employeeId);
+        employeeServiceImpl.deleteEmployee(employeeId);
 
         //then
         verify(employeeRepository, times(0)).deleteById(anyInt());

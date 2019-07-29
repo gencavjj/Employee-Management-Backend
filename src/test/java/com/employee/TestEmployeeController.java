@@ -25,7 +25,7 @@ public class TestEmployeeController {
     private List<Employee> employees;
 
     @Mock
-    private EmployeeService employeeService;
+    private EmployeeServiceImpl employeeServiceImpl;
 
     private EmployeeController employeeController;
 
@@ -36,7 +36,7 @@ public class TestEmployeeController {
         employees = new ArrayList<>();
         employees.add(employee);
 
-        employeeController = new EmployeeController(employeeService);
+        employeeController = new EmployeeController(employeeServiceImpl);
     }
 
     //Testing the createEmployee method
@@ -44,7 +44,7 @@ public class TestEmployeeController {
     public void testCreateEmployees() {
         //given
         ResponseEntity<Employee> predictedResponse = new ResponseEntity<>(employee, HttpStatus.CREATED);
-        when(employeeService.createEmployee(employee)).thenReturn(employee);
+        when(employeeServiceImpl.createEmployee(employee)).thenReturn(employee);
 
         //when
         ResponseEntity<Employee> actualResponse = employeeController.createEmployee(employee);
@@ -58,7 +58,7 @@ public class TestEmployeeController {
     public void testFindAllEmployees() {
         //given
         ResponseEntity<List<Employee>> predictedResponse = new ResponseEntity<>(employees, HttpStatus.OK);
-        when(employeeService.findEmployees()).thenReturn(employees);
+        when(employeeServiceImpl.findEmployees()).thenReturn(employees);
 
         //when
         ResponseEntity<List<Employee>> actualResponse = employeeController.findEmployees();
@@ -72,7 +72,7 @@ public class TestEmployeeController {
     public void testFindEmployeeById() {
         //given
         ResponseEntity<Employee> predictedResponse = new ResponseEntity<>(employee, HttpStatus.OK);
-        when((employeeService.findEmployee(employeeId))).thenReturn(employee);
+        when((employeeServiceImpl.findEmployee(employeeId))).thenReturn(employee);
 
         //when
         ResponseEntity<Employee> actualResponse= employeeController.findEmployee(employeeId);
@@ -86,7 +86,7 @@ public class TestEmployeeController {
     public void testUpdateEmployee() {
         //given
         ResponseEntity<Employee> predictedResponse = new ResponseEntity<>(employee, HttpStatus.OK);
-        when((employeeService.updateEmployee(employeeId,employee))).thenReturn(employee);
+        when((employeeServiceImpl.updateEmployee(employeeId,employee))).thenReturn(employee);
 
         //when
         ResponseEntity<Employee> actualResponse = employeeController.updateEmployee(employeeId,employee);
@@ -105,7 +105,7 @@ public class TestEmployeeController {
         ResponseEntity<?> actualResponse = employeeController.deleteEmployee(employeeId);
 
         //then
-        verify(employeeService, times(1)).deleteEmployee(employeeId);
+        verify(employeeServiceImpl, times(1)).deleteEmployee(employeeId);
     }
 
     //Testing that the employee is deleted
@@ -115,7 +115,7 @@ public class TestEmployeeController {
         employeeController.deleteEmployee(employeeId);
 
         //then
-        verify(employeeService, times(1)).deleteEmployee(employeeId);
+        verify(employeeServiceImpl, times(1)).deleteEmployee(employeeId);
     }
 
 }
