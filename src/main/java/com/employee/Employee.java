@@ -28,7 +28,7 @@ public class Employee implements Serializable {
     @Column(name = "TEXT")
     private String text;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "EMPLOYEE", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
     private List<Note> notes = new ArrayList<>();
 
     public Integer getEmployeeId() {
