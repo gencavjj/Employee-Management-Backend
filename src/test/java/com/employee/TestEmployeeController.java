@@ -21,8 +21,8 @@ import static org.mockito.Mockito.verify;
 public class TestEmployeeController {
 
     private int employeeId;
-    private EmployeeModel employee;
-    private List<EmployeeModel> employees;
+    private Employee employee;
+    private List<Employee> employees;
 
     @Mock
     private EmployeeService employeeService;
@@ -32,7 +32,7 @@ public class TestEmployeeController {
     @Before
     public void init() {
         employeeId = 1;
-        employee = new EmployeeModel();
+        employee = new Employee();
         employees = new ArrayList<>();
         employees.add(employee);
 
@@ -43,11 +43,11 @@ public class TestEmployeeController {
     @Test
     public void testCreateEmployees() {
         //given
-        ResponseEntity<EmployeeModel> predictedResponse = new ResponseEntity<>(employee, HttpStatus.CREATED);
+        ResponseEntity<Employee> predictedResponse = new ResponseEntity<>(employee, HttpStatus.CREATED);
         when(employeeService.createEmployee(employee)).thenReturn(employee);
 
         //when
-        ResponseEntity<EmployeeModel> actualResponse = employeeController.createEmployee(employee);
+        ResponseEntity<Employee> actualResponse = employeeController.createEmployee(employee);
 
         //then
         assertEquals("There was an error creating the employee", predictedResponse, actualResponse);
@@ -57,11 +57,11 @@ public class TestEmployeeController {
     @Test
     public void testFindAllEmployees() {
         //given
-        ResponseEntity<List<EmployeeModel>> predictedResponse = new ResponseEntity<>(employees, HttpStatus.OK);
+        ResponseEntity<List<Employee>> predictedResponse = new ResponseEntity<>(employees, HttpStatus.OK);
         when(employeeService.findEmployees()).thenReturn(employees);
 
         //when
-        ResponseEntity<List<EmployeeModel>> actualResponse = employeeController.findEmployees();
+        ResponseEntity<List<Employee>> actualResponse = employeeController.findEmployees();
 
         //then
         assertEquals("There was an error finding the employees", predictedResponse, actualResponse);
@@ -71,11 +71,11 @@ public class TestEmployeeController {
     @Test
     public void testFindEmployeeById() {
         //given
-        ResponseEntity<EmployeeModel> predictedResponse = new ResponseEntity<>(employee, HttpStatus.OK);
+        ResponseEntity<Employee> predictedResponse = new ResponseEntity<>(employee, HttpStatus.OK);
         when((employeeService.findEmployee(employeeId))).thenReturn(employee);
 
         //when
-        ResponseEntity<EmployeeModel> actualResponse= employeeController.findEmployee(employeeId);
+        ResponseEntity<Employee> actualResponse= employeeController.findEmployee(employeeId);
 
         //then
         assertEquals("There was an error finding the employee", actualResponse, predictedResponse);
@@ -85,11 +85,11 @@ public class TestEmployeeController {
     @Test
     public void testUpdateEmployee() {
         //given
-        ResponseEntity<EmployeeModel> predictedResponse = new ResponseEntity<>(employee, HttpStatus.OK);
+        ResponseEntity<Employee> predictedResponse = new ResponseEntity<>(employee, HttpStatus.OK);
         when((employeeService.updateEmployee(employeeId,employee))).thenReturn(employee);
 
         //when
-        ResponseEntity<EmployeeModel> actualResponse = employeeController.updateEmployee(employeeId,employee);
+        ResponseEntity<Employee> actualResponse = employeeController.updateEmployee(employeeId,employee);
 
         //then
         assertEquals("There was an error updating the employee", actualResponse, predictedResponse);

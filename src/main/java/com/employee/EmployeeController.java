@@ -21,33 +21,33 @@ public class EmployeeController {
 
     //Create
     @PostMapping("/api/employees")
-    public ResponseEntity<EmployeeModel> createEmployee(@RequestBody EmployeeModel employee) {
-        EmployeeModel createdEmployee = employeeService.createEmployee(employee);
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+        Employee createdEmployee = employeeService.createEmployee(employee);
         return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
     }
 
     //Read all Employees that exist
     @GetMapping("/api/employees")
-    public ResponseEntity<List<EmployeeModel>> findEmployees() {
-        List<EmployeeModel> employees = employeeService.findEmployees();
+    public ResponseEntity<List<Employee>> findEmployees() {
+        List<Employee> employees = employeeService.findEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
-    //Read an EmployeeModel by employeeId
+    //Read an Employee by employeeId
     @GetMapping("/api/employees/{employeeId}")
-    public ResponseEntity<EmployeeModel> findEmployee(@PathVariable("employeeId") int employeeId) {
-        EmployeeModel employee = employeeService.findEmployee(employeeId);
+    public ResponseEntity<Employee> findEmployee(@PathVariable("employeeId") int employeeId) {
+        Employee employee = employeeService.findEmployee(employeeId);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    //Update an EmployeeModel
+    //Update an Employee
     @PutMapping("/api/employees/{employeeId}")
-    public ResponseEntity<EmployeeModel> updateEmployee(@PathVariable int employeeId, @RequestBody EmployeeModel employee) {
-        EmployeeModel updatedEmployee = employeeService.updateEmployee(employeeId, employee);
+    public ResponseEntity<Employee> updateEmployee(@PathVariable int employeeId, @RequestBody Employee employee) {
+        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
         return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
     }
 
-    //Delete an EmployeeModel
+    //Delete an Employee
     @DeleteMapping("/api/employees/{employeeId}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("employeeId") int employeeId) {
         employeeService.deleteEmployee(employeeId);

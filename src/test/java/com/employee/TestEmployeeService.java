@@ -18,8 +18,8 @@ import static org.mockito.Mockito.*;
 public class TestEmployeeService {
 
     private int employeeId;
-    private EmployeeModel employee;
-    private List<EmployeeModel> employees;
+    private Employee employee;
+    private List<Employee> employees;
 
     @Mock
     private EmployeeRepository employeeRepository;
@@ -30,7 +30,7 @@ public class TestEmployeeService {
     public void init() {
 
         employeeId = 1;
-        employee = new EmployeeModel();
+        employee = new Employee();
         employees = new ArrayList<>();
         employees.add(employee);
 
@@ -44,7 +44,7 @@ public class TestEmployeeService {
         when(employeeRepository.save(employee)).thenReturn(employee);
 
         //when
-        EmployeeModel createdEmployee = employeeService.createEmployee(employee);
+        Employee createdEmployee = employeeService.createEmployee(employee);
 
         //then
         Assert.assertEquals("There was an error creating an employee", employee, createdEmployee);
@@ -56,7 +56,7 @@ public class TestEmployeeService {
         when(employeeRepository.findAll()).thenReturn(employees);
 
         //when
-        List<EmployeeModel> returnedEmployees = employeeService.findEmployees();
+        List<Employee> returnedEmployees = employeeService.findEmployees();
 
         //then
         Assert.assertEquals("There was an error getting the employees", employees, returnedEmployees);
@@ -68,7 +68,7 @@ public class TestEmployeeService {
         when(employeeRepository.findById(employeeId)).thenReturn(Optional.of(employee));
 
         //when
-        EmployeeModel returnedEmployee = employeeService.findEmployee(employeeId);
+        Employee returnedEmployee = employeeService.findEmployee(employeeId);
 
         //then
         Assert.assertEquals("There was an error finding the employee", employee, returnedEmployee);
@@ -88,7 +88,7 @@ public class TestEmployeeService {
         when(employeeRepository.save(employee)).thenReturn(employee);
 
         //when
-        EmployeeModel updatedEmployee = employeeService.updateEmployee(employeeId, employee);
+        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
 
         //then
         Assert.assertEquals("There was an error updating the employee", employee, updatedEmployee);
@@ -100,7 +100,7 @@ public class TestEmployeeService {
         when(employeeRepository.save(employee)).thenReturn(employee);
 
         //when
-        EmployeeModel updatedEmployee = employeeService.updateEmployee(employeeId, employee);
+        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
         int updatedEmployeeId = updatedEmployee.getEmployeeId();
 
         //then
