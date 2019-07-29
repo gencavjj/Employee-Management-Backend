@@ -1,5 +1,3 @@
-DROP TABLE employee;
-
 CREATE TABLE employee (
 employee_id NUMBER(10,0) NOT NULL AUTO_INCREMENT,
 first_name VARCHAR2(255) DEFAULT NULL,
