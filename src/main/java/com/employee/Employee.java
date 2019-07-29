@@ -1,15 +1,12 @@
 package com.employee;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "EMPLOYEE")
-public class Employee implements Serializable {
-
-    private static final long serialVersionUID = 7548395543L;
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
