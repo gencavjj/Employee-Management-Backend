@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findEmployee(int employeeId) {
         Optional<Employee> employee = employeeRepository.findById(employeeId);
-        return employeeRepository.findById(employeeId).orElseThrow(() -> new RuntimeException("Employee does not exist"));
+        return employee.orElseThrow(() -> new RuntimeException("Employee does not exist"));
     }
 
     @Override
