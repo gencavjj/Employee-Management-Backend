@@ -22,9 +22,6 @@ public class Employee {
     @Column(name = "EMAIL_ADDRESS")
     private String emailAddress;
 
-    @Column(name = "TEXT")
-    private String text;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
     private List<Note> notes = new ArrayList<>();
 
@@ -58,14 +55,6 @@ public class Employee {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public List<Note> getNotes() {
