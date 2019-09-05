@@ -104,7 +104,7 @@ public class TestEmployeeService {
 
         //when
         Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
-        int updatedEmployeeId = updatedEmployee.getEmployeeId();
+        int updatedEmployeeId = updatedEmployee.getEmployeeID();
 
         //then
         Assert.assertEquals("There was an error updating the employee ID", employeeId, updatedEmployeeId);

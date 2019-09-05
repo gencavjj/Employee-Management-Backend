@@ -29,19 +29,19 @@ class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-    Employee findEmployee(int employeeId) {
-        Optional<Employee> employee = employeeRepository.findById(employeeId);
+    Employee findEmployee(int employeeID) {
+        Optional<Employee> employee = employeeRepository.findById(employeeID);
         return employee.orElseThrow(() -> new RuntimeException("Employee does not exist"));
     }
 
-    Employee updateEmployee(int employeeId, Employee employee) {
-        employee.setEmployeeId(employeeId);
+    Employee updateEmployee(int employeeID, Employee employee) {
+        employee.setEmployeeID(employeeID);
         return employeeRepository.save(employee);
     }
 
-    void deleteEmployee(int employeeId) {
-        if (employeeRepository.existsById(employeeId)) {
-            employeeRepository.deleteById(employeeId);
+    void deleteEmployee(int employeeID) {
+        if (employeeRepository.existsById(employeeID)) {
+            employeeRepository.deleteById(employeeID);
         }
 
     }

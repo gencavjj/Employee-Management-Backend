@@ -10,7 +10,7 @@ public class EmployeeMapper {
 
     EmployeeDTO getEmployeeDTO(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setEmployeeID(employee.getEmployeeId());
+        employeeDTO.setEmployeeID(employee.getEmployeeID());
         employeeDTO.setFullName(employee.getFirstName() + ' ' + employee.getLastName());
         employeeDTO.setNotes(getNotesFromEmployee(employee));
         return employeeDTO;

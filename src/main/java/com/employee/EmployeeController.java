@@ -33,23 +33,23 @@ public class EmployeeController {
     }
 
     //Read an Employee by employeeId
-    @GetMapping("/api/employees/{employeeId}")
-    public ResponseEntity<Employee> findEmployee(@PathVariable("employeeId") int employeeId) {
-        Employee employee = employeeService.findEmployee(employeeId);
+    @GetMapping("/api/employees/{employeeID}")
+    public ResponseEntity<Employee> findEmployee(@PathVariable("employeeID") int employeeID) {
+        Employee employee = employeeService.findEmployee(employeeID);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
     //Update an Employee
-    @PutMapping("/api/employees/{employeeId}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable int employeeId, @RequestBody Employee employee) {
-        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
+    @PutMapping("/api/employees/{employeeID}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable int employeeID, @RequestBody Employee employee) {
+        Employee updatedEmployee = employeeService.updateEmployee(employeeID, employee);
         return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
     }
 
     //Delete an Employee
-    @DeleteMapping("/api/employees/{employeeId}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("employeeId") int employeeId) {
-        employeeService.deleteEmployee(employeeId);
+    @DeleteMapping("/api/employees/{employeeID}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable("employeeID") int employeeID) {
+        employeeService.deleteEmployee(employeeID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
