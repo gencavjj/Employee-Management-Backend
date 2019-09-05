@@ -27,8 +27,8 @@ public class EmployeeController {
 
     //Read all Employees that exist
     @GetMapping("/api/employees")
-    public ResponseEntity<List<Employee>> findEmployees() {
-        List<Employee> employees = employeeService.findEmployees();
+    public ResponseEntity<List<EmployeeDTO>> findEmployees() {
+        List<EmployeeDTO> employees = employeeService.findEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
