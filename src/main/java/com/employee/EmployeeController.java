@@ -20,9 +20,9 @@ public class EmployeeController {
 
     //Create
     @PostMapping("/api/employees")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        Employee createdEmployee = employeeService.createEmployee(employee);
-        return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
+    public ResponseEntity<?> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        employeeService.createEmployee(employeeDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //Read all Employees that exist

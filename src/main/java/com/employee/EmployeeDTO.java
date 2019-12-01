@@ -6,7 +6,8 @@ import java.util.List;
 public class EmployeeDTO implements Serializable {
 
     private Integer employeeID;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private List<String> notes;
 
     public Integer getEmployeeID() {
@@ -19,14 +20,20 @@ public class EmployeeDTO implements Serializable {
         this.employeeID = employeeID;
     }
 
-    public String getFullName() {
-
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-        this.fullName = fullName;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public List<String> getNotes() {
