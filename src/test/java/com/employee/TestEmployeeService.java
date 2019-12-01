@@ -111,12 +111,7 @@ public class TestEmployeeService {
         when(employeeMapper.getEmployeeForEmployeeDTO(employeeDTO)).thenReturn(employee);
 
         //when
-<<<<<<< HEAD
-        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
-        int updatedEmployeeId = updatedEmployee.getEmployeeID();
-=======
         employeeService.updateEmployee(employeeId, employeeDTO);
->>>>>>> ead1743c1f2c9e4722978fe422001499df0d2774
 
         //then
         verify(employeeRepository, times(1)).save(employee);

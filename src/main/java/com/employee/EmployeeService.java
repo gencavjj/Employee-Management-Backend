@@ -31,16 +31,6 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
-<<<<<<< HEAD
-    Employee findEmployee(int employeeID) {
-        Optional<Employee> employee = employeeRepository.findById(employeeID);
-        return employee.orElseThrow(() -> new RuntimeException("Employee does not exist"));
-    }
-
-    Employee updateEmployee(int employeeID, Employee employee) {
-        employee.setEmployeeID(employeeID);
-        return employeeRepository.save(employee);
-=======
     EmployeeDTO findEmployee(int employeeId) {
         Optional<Employee> employee = employeeRepository.findById(employeeId);
         return employee.map(employeeMapper::getEmployeeDTOForEmployee).orElseThrow(() -> new RuntimeException("Employee does not exist"));
@@ -50,8 +40,6 @@ public class EmployeeService {
         employeeDTO.setEmployeeId(employeeId);
         Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
         employeeRepository.save(employee);
-
->>>>>>> ead1743c1f2c9e4722978fe422001499df0d2774
     }
 
     void deleteEmployee(int employeeID) {

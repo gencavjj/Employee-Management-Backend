@@ -25,11 +25,11 @@ public class Employee {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee", orphanRemoval = true)
     private List<Note> notes = new ArrayList<>();
 
-    public Integer getEmployeeID() {
+    public Integer getEmployeeId() {
         return employeeID;
     }
 
-    public void setEmployeeID(Integer employeeID) {
+    public void setEmployeeId(Integer employeeID) {
         this.employeeID = employeeID;
     }
 

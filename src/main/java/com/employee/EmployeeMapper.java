@@ -25,14 +25,9 @@ public class EmployeeMapper {
 
     EmployeeDTO getEmployeeDTOForEmployee(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-<<<<<<< HEAD
-        employeeDTO.setEmployeeID(employee.getEmployeeID());
-        employeeDTO.setFullName(employee.getFirstName() + ' ' + employee.getLastName());
-=======
         employeeDTO.setEmployeeId(employee.getEmployeeId());
         employeeDTO.setFirstName(employee.getFirstName());
         employeeDTO.setLastName(employee.getLastName());
->>>>>>> ead1743c1f2c9e4722978fe422001499df0d2774
         employeeDTO.setNotes(getNotesFromEmployee(employee));
         return employeeDTO;
     }
