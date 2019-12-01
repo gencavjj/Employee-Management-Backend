@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,8 @@ import static org.mockito.Mockito.*;
 public class TestEmployeeService {
 
     private int employeeId;
+    private EmployeeDTO employeeDTO;
+    private List<EmployeeDTO> employeeDTOS;
     private Employee employee;
     private List<Employee> employees;
 
@@ -44,37 +47,42 @@ public class TestEmployeeService {
     @Test
     public void testCreateEmployee() {
         //given
-        when(employeeRepository.save(employee)).thenReturn(employee);
+        when(employeeMapper.getEmployeeForEmployeeDTO(employeeDTO)).thenReturn(employee);
 
         //when
-        Employee createdEmployee = employeeService.createEmployee(employee);
+        employeeService.createEmployee(employeeDTO);
 
         //then
-        Assert.assertEquals("There was an error creating an employee", employee, createdEmployee);
+        verify(employeeRepository, times(1)).save(employee);
     }
 
-//    @Test
-//    public void testFindEmployees() {
-//        //given
-//        when(employeeRepository.findAll()).thenReturn(employees);
-//
-//        //when
-//        List<Employee> returnedEmployees = employeeService.findEmployees();
-//
-//        //then
-//        Assert.assertEquals("There was an error getting the employees", employees, returnedEmployees);
-//    }
+    @Test
+    public void testFindEmployees() {
+        //given
+        List<EmployeeDTO> predictedEmployeeDTOs = Collections.singletonList(employeeDTO);
+
+        when(employeeRepository.findAll()).thenReturn(Collections.singletonList(employee));
+        when(employeeMapper.getEmployeeDTOForEmployee(employee)).thenReturn(employeeDTO);
+
+        //when
+        List<EmployeeDTO> returnedEmployeeDTOs = employeeService.findEmployees();
+
+        //then
+        Assert.assertEquals("There was an error getting the employees", predictedEmployeeDTOs, returnedEmployeeDTOs);
+
+    }
 
     @Test
     public void testFindEmployee() {
         //given
         when(employeeRepository.findById(employeeId)).thenReturn(Optional.of(employee));
+        when(employeeMapper.getEmployeeDTOForEmployee(employee)).thenReturn(employeeDTO);
 
         //when
-        Employee returnedEmployee = employeeService.findEmployee(employeeId);
+        EmployeeDTO returnedEmployee = employeeService.findEmployee(employeeId);
 
         //then
-        Assert.assertEquals("There was an error finding the employee", employee, returnedEmployee);
+        Assert.assertEquals("There was an error finding the employee", employeeDTO, returnedEmployee);
     }
 
     @Test(expected = RuntimeException.class)
@@ -88,26 +96,30 @@ public class TestEmployeeService {
     @Test
     public void testUpdateEmployee() {
         //given
-        when(employeeRepository.save(employee)).thenReturn(employee);
+        when(employeeMapper.getEmployeeForEmployeeDTO(employeeDTO)).thenReturn(employee);
 
         //when
-        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
+        employeeService.updateEmployee(employeeId, employeeDTO);
 
         //then
-        Assert.assertEquals("There was an error updating the employee", employee, updatedEmployee);
+        verify(employeeRepository, times(1)).save(employee);
     }
 
     @Test
     public void testUpdateEmployee_employeeIdUpdated() {
         //given
-        when(employeeRepository.save(employee)).thenReturn(employee);
+        when(employeeMapper.getEmployeeForEmployeeDTO(employeeDTO)).thenReturn(employee);
 
         //when
+<<<<<<< HEAD
         Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
         int updatedEmployeeId = updatedEmployee.getEmployeeID();
+=======
+        employeeService.updateEmployee(employeeId, employeeDTO);
+>>>>>>> ead1743c1f2c9e4722978fe422001499df0d2774
 
         //then
-        Assert.assertEquals("There was an error updating the employee ID", employeeId, updatedEmployeeId);
+        verify(employeeRepository, times(1)).save(employee);
     }
 
     @Test

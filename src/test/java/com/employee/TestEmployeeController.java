@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -21,8 +22,10 @@ import static org.mockito.Mockito.verify;
 public class TestEmployeeController {
 
     private int employeeId;
-    private Employee employee;
-    private List<Employee> employees;
+    private EmployeeDTO employeeDTO;
+    private List<EmployeeDTO> employeeDTOS;
+    //private Employee employee;
+    //private List<Employee> employees;
 
     @Mock
     private EmployeeService employeeService;
@@ -32,9 +35,12 @@ public class TestEmployeeController {
     @Before
     public void init() {
         employeeId = 1;
-        employee = new Employee();
-        employees = new ArrayList<>();
-        employees.add(employee);
+        employeeDTO = new EmployeeDTO();
+        employeeDTOS = new ArrayList<>();
+        employeeDTOS.add(employeeDTO);
+        //employee = new Employee();
+        //employees = new ArrayList<>();
+        //employees.add(employee);
 
         employeeController = new EmployeeController(employeeService);
     }
@@ -43,39 +49,38 @@ public class TestEmployeeController {
     @Test
     public void testCreateEmployees() {
         //given
-        ResponseEntity<Employee> predictedResponse = new ResponseEntity<>(employee, HttpStatus.CREATED);
-        when(employeeService.createEmployee(employee)).thenReturn(employee);
+        ResponseEntity<?> predictedResponse = new ResponseEntity<>(employeeDTO, HttpStatus.CREATED);
 
         //when
-        ResponseEntity<Employee> actualResponse = employeeController.createEmployee(employee);
+        ResponseEntity<?> actualResponse = employeeController.createEmployee(employeeDTO);
 
         //then
         assertEquals("There was an error creating the employee", predictedResponse, actualResponse);
     }
 
     //Testing the findEmployees method (find all)
-//    @Test
-//    public void testFindAllEmployees() {
-//        //given
-//        ResponseEntity<List<Employee>> predictedResponse = new ResponseEntity<>(employees, HttpStatus.OK);
-//        when(employeeService.findEmployees()).thenReturn(employees);
-//
-//        //when
-//        ResponseEntity<List<Employee>> actualResponse = employeeController.findEmployees();
-//
-//        //then
-//        assertEquals("There was an error finding the employees", predictedResponse, actualResponse);
-//    }
+    @Test
+    public void testFindAllEmployees() {
+        //given
+        ResponseEntity<List<EmployeeDTO>> predictedResponse = new ResponseEntity<>(employeeDTOS, HttpStatus.OK);
+        when(employeeService.findEmployees()).thenReturn(employeeDTOS);
+        
+        //when
+        ResponseEntity<List<EmployeeDTO>> actualResponse = employeeController.findEmployees();
+
+        //then
+        assertEquals("There was an error finding the employees", predictedResponse, actualResponse);
+    }
 
     //Testing the findEmployee method (find by Id)
     @Test
     public void testFindEmployeeById() {
         //given
-        ResponseEntity<Employee> predictedResponse = new ResponseEntity<>(employee, HttpStatus.OK);
-        when((employeeService.findEmployee(employeeId))).thenReturn(employee);
+        ResponseEntity<EmployeeDTO> predictedResponse = new ResponseEntity<>(employeeDTO, HttpStatus.OK);
+        when((employeeService.findEmployee(employeeId))).thenReturn(employeeDTO);
 
         //when
-        ResponseEntity<Employee> actualResponse= employeeController.findEmployee(employeeId);
+        ResponseEntity<EmployeeDTO> actualResponse= employeeController.findEmployee(employeeId);
 
         //then
         assertEquals("There was an error finding the employee", actualResponse, predictedResponse);
@@ -85,27 +90,36 @@ public class TestEmployeeController {
     @Test
     public void testUpdateEmployee() {
         //given
-        ResponseEntity<Employee> predictedResponse = new ResponseEntity<>(employee, HttpStatus.OK);
-        when((employeeService.updateEmployee(employeeId,employee))).thenReturn(employee);
+        ResponseEntity<?> predictedResponse = new ResponseEntity<>(employeeDTO, HttpStatus.OK);
 
         //when
-        ResponseEntity<Employee> actualResponse = employeeController.updateEmployee(employeeId,employee);
+        ResponseEntity<?> actualResponse = employeeController.updateEmployee(employeeId,employeeDTO);
 
         //then
         assertEquals("There was an error updating the employee", actualResponse, predictedResponse);
     }
 
+    /**
+
+     First 'delete' test should assert that the appropriate response is received.
+
+     Since we return an OK status whenever something is deleted, this will be our predicted value.
+
+     Second 'delete' test should verify that the correct method was called with the desired arguments.
+
+     * */
+
     //Testing the deleteEmployee method
     @Test
     public void testDeleteEmployee() {
         //given
-        ResponseEntity<?> predictedResponse = new ResponseEntity<>(employeeId,HttpStatus.OK);
+        ResponseEntity<?> predictedResponse = new ResponseEntity<>(HttpStatus.OK);
 
         //when
         ResponseEntity<?> actualResponse = employeeController.deleteEmployee(employeeId);
 
         //then
-        verify(employeeService, times(1)).deleteEmployee(employeeId);
+        assertEquals("There was an error deleting the employee", actualResponse, predictedResponse);
     }
 
     //Testing that the employee is deleted

@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-class EmployeeService {
+public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
@@ -17,18 +17,21 @@ class EmployeeService {
         this.employeeMapper = employeeMapper;
     }
 
-    Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    void createEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
+        employeeRepository.save(employee);
+
     }
 
     List<EmployeeDTO> findEmployees() {
         return employeeRepository
                 .findAll()
                 .stream()
-                .map(employeeMapper::getEmployeeDTO)
+                .map(employeeMapper::getEmployeeDTOForEmployee)
                 .collect(Collectors.toList());
     }
 
+<<<<<<< HEAD
     Employee findEmployee(int employeeID) {
         Optional<Employee> employee = employeeRepository.findById(employeeID);
         return employee.orElseThrow(() -> new RuntimeException("Employee does not exist"));
@@ -37,6 +40,18 @@ class EmployeeService {
     Employee updateEmployee(int employeeID, Employee employee) {
         employee.setEmployeeID(employeeID);
         return employeeRepository.save(employee);
+=======
+    EmployeeDTO findEmployee(int employeeId) {
+        Optional<Employee> employee = employeeRepository.findById(employeeId);
+        return employee.map(employeeMapper::getEmployeeDTOForEmployee).orElseThrow(() -> new RuntimeException("Employee does not exist"));
+    }
+
+    void updateEmployee(int employeeId, EmployeeDTO employeeDTO) {
+        employeeDTO.setEmployeeId(employeeId);
+        Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
+        employeeRepository.save(employee);
+
+>>>>>>> ead1743c1f2c9e4722978fe422001499df0d2774
     }
 
     void deleteEmployee(int employeeID) {

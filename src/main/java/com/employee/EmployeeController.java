@@ -20,9 +20,9 @@ public class EmployeeController {
 
     //Create
     @PostMapping("/api/employees")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        Employee createdEmployee = employeeService.createEmployee(employee);
-        return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
+    public ResponseEntity<?> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        employeeService.createEmployee(employeeDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //Read all Employees that exist
@@ -33,6 +33,7 @@ public class EmployeeController {
     }
 
     //Read an Employee by employeeId
+<<<<<<< HEAD
     @GetMapping("/api/employees/{employeeID}")
     public ResponseEntity<Employee> findEmployee(@PathVariable("employeeID") int employeeID) {
         Employee employee = employeeService.findEmployee(employeeID);
@@ -44,6 +45,19 @@ public class EmployeeController {
     public ResponseEntity<Employee> updateEmployee(@PathVariable int employeeID, @RequestBody Employee employee) {
         Employee updatedEmployee = employeeService.updateEmployee(employeeID, employee);
         return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
+=======
+    @GetMapping("/api/employees/{employeeId}")
+    public ResponseEntity<EmployeeDTO> findEmployee(@PathVariable("employeeId") int employeeId) {
+        EmployeeDTO employeeDTO = employeeService.findEmployee(employeeId);
+        return new ResponseEntity<>(employeeDTO, HttpStatus.OK);
+    }
+
+    //Update an Employee
+    @PutMapping("/api/employees/{employeeId}")
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable int employeeId, @RequestBody EmployeeDTO employeeDTO) {
+        employeeService.updateEmployee(employeeId, employeeDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+>>>>>>> ead1743c1f2c9e4722978fe422001499df0d2774
     }
 
     //Delete an Employee

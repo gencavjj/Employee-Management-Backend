@@ -5,31 +5,31 @@ import java.util.List;
 
 public class EmployeeDTO implements Serializable {
 
-    private Integer employeeID;
-    private String fullName;
+    private Integer employeeId;
+    private String firstName;
+    private String lastName;
     private List<String> notes;
 
-    public Integer getEmployeeID() {
-        return employeeID;
+
+    public Integer getEmployeeId() { return employeeId; }
+
+    public void setEmployeeId(Integer employeeId) { this.employeeId = employeeId; }
+
+    public String getFirstName() { return firstName; }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setEmployeeID(Integer employeeID) {
-        this.employeeID = employeeID;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getFullName() {
-        return fullName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    public List<String> getNotes() { return notes; }
 
-    public List<String> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<String> notes) {
-        this.notes = notes;
-    }
+    public void setNotes(List<String> notes) { this.notes = notes; }
 }
