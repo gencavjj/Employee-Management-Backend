@@ -21,6 +21,8 @@ import static org.mockito.Mockito.verify;
 public class TestEmployeeController {
 
     private int employeeId;
+    private EmployeeDTO employeeDTO;
+    private List<EmployeeDTO> employeeDTOS;
     private Employee employee;
     private List<Employee> employees;
 
@@ -32,6 +34,9 @@ public class TestEmployeeController {
     @Before
     public void init() {
         employeeId = 1;
+        employeeDTO = new EmployeeDTO();
+        employeeDTOS = new ArrayList<>();
+        employeeDTOS.add(employeeDTO);
         employee = new Employee();
         employees = new ArrayList<>();
         employees.add(employee);
@@ -54,18 +59,18 @@ public class TestEmployeeController {
     }
 
     //Testing the findEmployees method (find all)
-//    @Test
-//    public void testFindAllEmployees() {
-//        //given
-//        ResponseEntity<List<Employee>> predictedResponse = new ResponseEntity<>(employees, HttpStatus.OK);
-//        when(employeeService.findEmployees()).thenReturn(employees);
-//
-//        //when
-//        ResponseEntity<List<Employee>> actualResponse = employeeController.findEmployees();
-//
-//        //then
-//        assertEquals("There was an error finding the employees", predictedResponse, actualResponse);
-//    }
+    @Test
+    public void testFindAllEmployees() {
+        //given
+        ResponseEntity<List<EmployeeDTO>> predictedResponse = new ResponseEntity<>(employeeDTOS, HttpStatus.OK);
+        when(employeeService.findEmployees()).thenReturn(employeeDTOS);
+
+        //when
+        ResponseEntity<List<EmployeeDTO>> actualResponse = employeeController.findEmployees();
+
+        //then
+        assertEquals("There was an error finding the employees", predictedResponse, actualResponse);
+    }
 
     //Testing the findEmployee method (find by Id)
     @Test
