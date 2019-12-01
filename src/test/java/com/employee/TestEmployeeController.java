@@ -101,17 +101,27 @@ public class TestEmployeeController {
         assertEquals("There was an error updating the employee", actualResponse, predictedResponse);
     }
 
+    /**
+
+     First 'delete' test should assert that the appropriate response is received.
+
+     Since we return an OK status whenever something is deleted, this will be our predicted value.
+
+     Second 'delete' test should verify that the correct method was called with the desired arguments.
+
+     * */
+
     //Testing the deleteEmployee method
     @Test
     public void testDeleteEmployee() {
         //given
-        ResponseEntity<?> predictedResponse = new ResponseEntity<>(employeeId,HttpStatus.OK);
+        ResponseEntity<?> predictedResponse = new ResponseEntity<>(HttpStatus.OK);
 
         //when
         ResponseEntity<?> actualResponse = employeeController.deleteEmployee(employeeId);
 
         //then
-        verify(employeeService, times(1)).deleteEmployee(employeeId);
+        assertEquals("There was an error deleting the employee", actualResponse, predictedResponse);
     }
 
     //Testing that the employee is deleted
