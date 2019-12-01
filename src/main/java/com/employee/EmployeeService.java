@@ -40,12 +40,11 @@ public class EmployeeService {
         employeeDTO.setEmployeeId(employeeId);
         Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
         employeeRepository.save(employee);
-
     }
 
-    void deleteEmployee(int employeeId) {
-        if (employeeRepository.existsById(employeeId)) {
-            employeeRepository.deleteById(employeeId);
+    void deleteEmployee(int employeeID) {
+        if (employeeRepository.existsById(employeeID)) {
+            employeeRepository.deleteById(employeeID);
         }
 
     }
