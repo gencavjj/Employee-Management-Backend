@@ -8,15 +8,12 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeMapper {
 
-    // TODO: getEmployeeForEmployeeDTO()
     Employee getEmployeeForEmployeeDTO(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
+        employee.setEmployeeId(employeeDTO.getEmployeeId());
         employee.setFirstName(employeeDTO.getFirstName());
         employee.setLastName(employeeDTO.getLastName());
-        /**
-         TODO:
-
-         employeeDTO.getNotes()
+        employeeDTO.getNotes()
                     .forEach(noteMessage -> {
                       Note note = new Note();
                       note.setText(noteMessage);
@@ -24,13 +21,11 @@ public class EmployeeMapper {
                     });
 
          return employee;
-         * */
-        return new Employee();
     }
 
     EmployeeDTO getEmployeeDTOForEmployee(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setEmployeeID(employee.getEmployeeId());
+        employeeDTO.setEmployeeId(employee.getEmployeeId());
         employeeDTO.setFirstName(employee.getFirstName());
         employeeDTO.setLastName(employee.getLastName());
         employeeDTO.setNotes(getNotesFromEmployee(employee));

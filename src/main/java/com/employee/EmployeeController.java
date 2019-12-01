@@ -34,16 +34,16 @@ public class EmployeeController {
 
     //Read an Employee by employeeId
     @GetMapping("/api/employees/{employeeId}")
-    public ResponseEntity<Employee> findEmployee(@PathVariable("employeeId") int employeeId) {
-        Employee employee = employeeService.findEmployee(employeeId);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+    public ResponseEntity<EmployeeDTO> findEmployee(@PathVariable("employeeId") int employeeId) {
+        EmployeeDTO employeeDTO = employeeService.findEmployee(employeeId);
+        return new ResponseEntity<>(employeeDTO, HttpStatus.OK);
     }
 
     //Update an Employee
     @PutMapping("/api/employees/{employeeId}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable int employeeId, @RequestBody Employee employee) {
-        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
-        return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable int employeeId, @RequestBody EmployeeDTO employeeDTO) {
+        employeeService.updateEmployee(employeeId, employeeDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //Delete an Employee

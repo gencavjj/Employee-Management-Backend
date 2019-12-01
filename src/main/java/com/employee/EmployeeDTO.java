@@ -5,24 +5,17 @@ import java.util.List;
 
 public class EmployeeDTO implements Serializable {
 
-    private Integer employeeID;
+    private Integer employeeId;
     private String firstName;
     private String lastName;
     private List<String> notes;
 
-    public Integer getEmployeeID() {
 
-        return employeeID;
-    }
+    public Integer getEmployeeId() { return employeeId; }
 
-    public void setEmployeeID(Integer employeeID) {
+    public void setEmployeeId(Integer employeeId) { this.employeeId = employeeId; }
 
-        this.employeeID = employeeID;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return firstName; }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -36,13 +29,7 @@ public class EmployeeDTO implements Serializable {
         this.lastName = lastName;
     }
 
-    public List<String> getNotes() {
+    public List<String> getNotes() { return notes; }
 
-        return notes;
-    }
-
-    public void setNotes(List<String> notes) {
-
-        this.notes = notes;
-    }
+    public void setNotes(List<String> notes) { this.notes = notes; }
 }

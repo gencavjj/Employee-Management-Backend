@@ -18,12 +18,9 @@ public class EmployeeService {
     }
 
     void createEmployee(EmployeeDTO employeeDTO) {
-        /**
-         TODO: Return 'void' type (nothing is returned from this method)
+        Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
+        employeeRepository.save(employee);
 
-         Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
-         employeeRepository.save(employee);
-         * */
     }
 
     List<EmployeeDTO> findEmployees() {
@@ -40,13 +37,10 @@ public class EmployeeService {
     }
 
     void updateEmployee(int employeeId, EmployeeDTO employeeDTO) {
-        employeeDTO.setEmployeeID(employeeId);
-        /**
-         TODO: uncomment
+        employeeDTO.setEmployeeId(employeeId);
+        Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
+        employeeRepository.save(employee);
 
-         Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
-         employeeRepository.save(employee);
-         * */
     }
 
     void deleteEmployee(int employeeId) {
