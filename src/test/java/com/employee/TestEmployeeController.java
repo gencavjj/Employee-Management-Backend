@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -54,18 +55,18 @@ public class TestEmployeeController {
     }
 
     //Testing the findEmployees method (find all)
-//    @Test
-//    public void testFindAllEmployees() {
-//        //given
-//        ResponseEntity<List<Employee>> predictedResponse = new ResponseEntity<>(employees, HttpStatus.OK);
-//        when(employeeService.findEmployees()).thenReturn(employees);
-//
-//        //when
-//        ResponseEntity<List<Employee>> actualResponse = employeeController.findEmployees();
-//
-//        //then
-//        assertEquals("There was an error finding the employees", predictedResponse, actualResponse);
-//    }
+    @Test
+    public void testFindAllEmployees() {
+        //given
+        ResponseEntity<List<EmployeeDTO>> predictedResponse = new ResponseEntity<>(employees, HttpStatus.OK);
+        when(employeeService.findEmployees()).thenReturn(employees);
+
+        //when
+        ResponseEntity<List<EmployeeDTO>> actualResponse = employeeController.findEmployees();
+
+        //then
+        assertEquals("There was an error finding the employees", predictedResponse, actualResponse);
+    }
 
     //Testing the findEmployee method (find by Id)
     @Test
