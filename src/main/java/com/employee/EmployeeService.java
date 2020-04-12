@@ -37,7 +37,7 @@ public class EmployeeService {
     }
 
     void updateEmployee(int employeeId, EmployeeDTO employeeDTO) {
-        employeeDTO.setEmployeeId(employeeId);
+        employeeDTO.setEmployeeID(employeeId);
         Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
         employeeRepository.save(employee);
     }

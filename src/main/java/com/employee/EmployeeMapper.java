@@ -10,9 +10,10 @@ public class EmployeeMapper {
 
     Employee getEmployeeForEmployeeDTO(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
-        employee.setEmployeeId(employeeDTO.getEmployeeId());
+        employee.setEmployeeId(employeeDTO.getEmployeeID());
         employee.setFirstName(employeeDTO.getFirstName());
         employee.setLastName(employeeDTO.getLastName());
+        employee.setEmailAddress(employeeDTO.getEmailAddress());
         employeeDTO.getNotes()
                     .forEach(noteMessage -> {
                       Note note = new Note();
@@ -25,9 +26,10 @@ public class EmployeeMapper {
 
     EmployeeDTO getEmployeeDTOForEmployee(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setEmployeeId(employee.getEmployeeId());
+        employeeDTO.setEmployeeID(employee.getEmployeeId());
         employeeDTO.setFirstName(employee.getFirstName());
         employeeDTO.setLastName(employee.getLastName());
+        employeeDTO.setEmailAddress(employee.getEmailAddress());
         employeeDTO.setNotes(getNotesFromEmployee(employee));
         return employeeDTO;
     }

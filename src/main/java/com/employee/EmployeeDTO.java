@@ -1,19 +1,21 @@
 package com.employee;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDTO implements Serializable {
 
-    private Integer employeeId;
+    private Integer employeeID;
     private String firstName;
     private String lastName;
-    private List<String> notes;
+    private String emailAddress;
+    private List<String> notes; //= new ArrayList<>();
 
 
-    public Integer getEmployeeId() { return employeeId; }
+    public Integer getEmployeeID() { return employeeID; }
 
-    public void setEmployeeId(Integer employeeId) { this.employeeId = employeeId; }
+    public void setEmployeeID(Integer employeeID) { this.employeeID = employeeID; }
 
     public String getFirstName() { return firstName; }
 
@@ -27,6 +29,14 @@ public class EmployeeDTO implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public List<String> getNotes() { return notes; }

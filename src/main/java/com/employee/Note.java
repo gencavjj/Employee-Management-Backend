@@ -12,7 +12,7 @@ public class Note implements Serializable {
     private static final long serialVersionUID = 432789457849L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "NOTE_ID")
     private Integer noteId;
 
