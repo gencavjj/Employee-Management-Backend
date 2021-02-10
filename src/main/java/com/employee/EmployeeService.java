@@ -17,31 +17,34 @@ public class EmployeeService {
         this.employeeMapper = employeeMapper;
     }
 
-    Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    void createEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
+        employeeRepository.save(employee);
+
     }
 
     List<EmployeeDTO> findEmployees() {
         return employeeRepository
                 .findAll()
                 .stream()
-                .map(employeeMapper::getEmployeeDTO)
+                .map(employeeMapper::getEmployeeDTOForEmployee)
                 .collect(Collectors.toList());
     }
 
-    Employee findEmployee(int employeeId) {
+    EmployeeDTO findEmployee(int employeeId) {
         Optional<Employee> employee = employeeRepository.findById(employeeId);
-        return employee.orElseThrow(() -> new RuntimeException("Employee does not exist"));
+        return employee.map(employeeMapper::getEmployeeDTOForEmployee).orElseThrow(() -> new RuntimeException("Employee does not exist"));
     }
 
-    Employee updateEmployee(int employeeId, Employee employee) {
-        employee.setEmployeeId(employeeId);
-        return employeeRepository.save(employee);
+    void updateEmployee(int employeeId, EmployeeDTO employeeDTO) {
+        employeeDTO.setEmployeeID(employeeId);
+        Employee employee = employeeMapper.getEmployeeForEmployeeDTO(employeeDTO);
+        employeeRepository.save(employee);
     }
 
-    void deleteEmployee(int employeeId) {
-        if (employeeRepository.existsById(employeeId)) {
-            employeeRepository.deleteById(employeeId);
+    void deleteEmployee(int employeeID) {
+        if (employeeRepository.existsById(employeeID)) {
+            employeeRepository.deleteById(employeeID);
         }
 
     }

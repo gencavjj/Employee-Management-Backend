@@ -8,10 +8,28 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeMapper {
 
-    EmployeeDTO getEmployeeDTO(Employee employee) {
+    Employee getEmployeeForEmployeeDTO(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        employee.setEmployeeId(employeeDTO.getEmployeeID());
+        employee.setFirstName(employeeDTO.getFirstName());
+        employee.setLastName(employeeDTO.getLastName());
+        employee.setEmailAddress(employeeDTO.getEmailAddress());
+        employeeDTO.getNotes()
+                    .forEach(noteMessage -> {
+                      Note note = new Note();
+                      note.setText(noteMessage);
+                      employee.addNote(note);
+                    });
+
+         return employee;
+    }
+
+    EmployeeDTO getEmployeeDTOForEmployee(Employee employee) {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setEmployeeID(employee.getEmployeeId());
-        employeeDTO.setFullName(employee.getFirstName() + ' ' + employee.getLastName());
+        employeeDTO.setFirstName(employee.getFirstName());
+        employeeDTO.setLastName(employee.getLastName());
+        employeeDTO.setEmailAddress(employee.getEmailAddress());
         employeeDTO.setNotes(getNotesFromEmployee(employee));
         return employeeDTO;
     }

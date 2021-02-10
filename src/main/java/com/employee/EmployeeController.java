@@ -20,9 +20,9 @@ public class EmployeeController {
 
     //Create
     @PostMapping("/api/employees")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        Employee createdEmployee = employeeService.createEmployee(employee);
-        return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
+    public ResponseEntity<?> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        employeeService.createEmployee(employeeDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //Read all Employees that exist
@@ -34,22 +34,22 @@ public class EmployeeController {
 
     //Read an Employee by employeeId
     @GetMapping("/api/employees/{employeeId}")
-    public ResponseEntity<Employee> findEmployee(@PathVariable("employeeId") int employeeId) {
-        Employee employee = employeeService.findEmployee(employeeId);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+    public ResponseEntity<EmployeeDTO> findEmployee(@PathVariable("employeeId") int employeeId) {
+        EmployeeDTO employeeDTO = employeeService.findEmployee(employeeId);
+        return new ResponseEntity<>(employeeDTO, HttpStatus.OK);
     }
 
     //Update an Employee
     @PutMapping("/api/employees/{employeeId}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable int employeeId, @RequestBody Employee employee) {
-        Employee updatedEmployee = employeeService.updateEmployee(employeeId, employee);
-        return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable int employeeId, @RequestBody EmployeeDTO employeeDTO) {
+        employeeService.updateEmployee(employeeId, employeeDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //Delete an Employee
-    @DeleteMapping("/api/employees/{employeeId}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("employeeId") int employeeId) {
-        employeeService.deleteEmployee(employeeId);
+    @DeleteMapping("/api/employees/{employeeID}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable("employeeID") int employeeID) {
+        employeeService.deleteEmployee(employeeID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
