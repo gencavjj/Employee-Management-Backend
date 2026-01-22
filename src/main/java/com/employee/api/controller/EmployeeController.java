@@ -1,5 +1,7 @@
-package com.employee;
+package com.employee.api.controller;
 
+import com.employee.api.behavior.*;
+import com.employee.api.model.EmployeeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,45 +13,54 @@ import java.util.List;
 @RestController
 public class EmployeeController {
 
-    private final EmployeeService employeeService;
+    private final CreateEmployee createEmployee;
+    private final FindEmployee findEmployee;
+    private final FindEmployees findEmployees;
+    private final UpdateEmployee updateEmployee;
+    private final DeleteEmployee deleteEmployee;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeController(
+            CreateEmployee createEmployee,
+            FindEmployee findEmployee,
+            FindEmployees findEmployees,
+            UpdateEmployee updateEmployee,
+            DeleteEmployee deleteEmployee
+    ) {
+        this.createEmployee = createEmployee;
+        this.findEmployee = findEmployee;
+        this.findEmployees = findEmployees;
+        this.updateEmployee = updateEmployee;
+        this.deleteEmployee = deleteEmployee;
     }
 
-    //Create
     @PostMapping("/api/employees")
     public ResponseEntity<?> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        employeeService.createEmployee(employeeDTO);
+        createEmployee.createEmployee(employeeDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    //Read all Employees that exist
     @GetMapping("/api/employees")
     public ResponseEntity<List<EmployeeDTO>> findEmployees() {
-        List<EmployeeDTO> employees = employeeService.findEmployees();
+        List<EmployeeDTO> employees = findEmployees.findEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
-    //Read an Employee by employeeId
     @GetMapping("/api/employees/{employeeId}")
     public ResponseEntity<EmployeeDTO> findEmployee(@PathVariable("employeeId") int employeeId) {
-        EmployeeDTO employeeDTO = employeeService.findEmployee(employeeId);
+        EmployeeDTO employeeDTO = findEmployee.findEmployee(employeeId);
         return new ResponseEntity<>(employeeDTO, HttpStatus.OK);
     }
 
-    //Update an Employee
     @PutMapping("/api/employees/{employeeId}")
     public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable int employeeId, @RequestBody EmployeeDTO employeeDTO) {
-        employeeService.updateEmployee(employeeId, employeeDTO);
+        updateEmployee.updateEmployee(employeeId, employeeDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //Delete an Employee
     @DeleteMapping("/api/employees/{employeeID}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("employeeID") int employeeID) {
-        employeeService.deleteEmployee(employeeID);
+        deleteEmployee.deleteEmployee(employeeID);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
