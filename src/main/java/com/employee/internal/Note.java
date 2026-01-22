@@ -1,4 +1,4 @@
-package com.employee;
+package com.employee.internal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

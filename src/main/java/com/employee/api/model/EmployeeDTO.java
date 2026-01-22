@@ -1,7 +1,6 @@
-package com.employee;
+package com.employee.api.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDTO implements Serializable {
@@ -10,7 +9,7 @@ public class EmployeeDTO implements Serializable {
     private String firstName;
     private String lastName;
     private String emailAddress;
-    private List<String> notes; //= new ArrayList<>();
+    private List<String> notes;
 
 
     public Integer getEmployeeID() { return employeeID; }
