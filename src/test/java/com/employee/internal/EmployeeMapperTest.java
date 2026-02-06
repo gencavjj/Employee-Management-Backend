@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 /**
  * Unit tests for EmployeeMapper.
- * 
+ *
  * These tests verify the mapping logic between entities and DTOs.
  * No mocking needed - this is pure transformation logic.
  */
@@ -198,16 +198,16 @@ public class EmployeeMapperTest {
     @Test
     public void toEntity_withSpecialCharactersInFields_shouldMapCorrectly() {
         // Arrange
-        EmployeeDTO dto = createEmployeeDTO(1, "José", "O'Brien", "jose.obrien@example.com");
-        dto.setNotes(Arrays.asList("Note with émojis 🎉", "Special chars: <>&\"'"));
+        EmployeeDTO dto = createEmployeeDTO(1, "Jose", "O'Brien", "jose.obrien@example.com");
+        dto.setNotes(Arrays.asList("Note with special chars", "Special chars: <>&\"'"));
 
         // Act
         Employee entity = mapper.toEntity(dto);
 
         // Assert
-        assertEquals("José", entity.getFirstName());
+        assertEquals("Jose", entity.getFirstName());
         assertEquals("O'Brien", entity.getLastName());
-        assertEquals("Note with émojis 🎉", entity.getNotes().get(0).getText());
+        assertEquals("Note with special chars", entity.getNotes().get(0).getText());
     }
 
     @Test

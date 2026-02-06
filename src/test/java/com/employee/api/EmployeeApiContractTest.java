@@ -1,4 +1,4 @@
-package com.employee.api.controller;
+package com.employee.api;
 
 import com.Main;
 import com.employee.api.model.EmployeeDTO;
@@ -22,13 +22,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * API Contract Tests for Employee endpoints.
- * 
+ *
  * These tests verify HTTP-specific behavior:
  * - Content types
  * - HTTP methods
  * - Response codes
  * - URL patterns
- * 
+ *
  * Useful for ensuring API contract stability.
  */
 @RunWith(SpringRunner.class)
@@ -57,7 +57,7 @@ public class EmployeeApiContractTest {
     public void getEmployees_shouldReturnJsonContentType() throws Exception {
         mockMvc.perform(get("/api/employees"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class EmployeeApiContractTest {
         // Act & Assert
         mockMvc.perform(get("/api/employees/{id}", employee.getEmployeeId()))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
