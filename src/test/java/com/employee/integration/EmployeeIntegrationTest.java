@@ -16,6 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,19 +29,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * Integration tests for the Employee API.
- * 
+ *
  * These tests verify the full request/response cycle:
  * - HTTP layer (controller)
  * - Business logic (service)
  * - Data access (repository)
  * - Database (H2 in-memory)
- * 
+ *
  * Uses @SpringBootTest to load the full application context.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("h2")
+@Transactional
 public class EmployeeIntegrationTest {
 
     @Autowired
@@ -102,7 +104,7 @@ public class EmployeeIntegrationTest {
         // Act & Assert
         mockMvc.perform(get("/api/employees"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(0)));
     }
 
@@ -147,13 +149,12 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("$.emailAddress", is("john@example.com")));
     }
 
-    @Test
-    public void findEmployee_whenNotExists_shouldReturn500() throws Exception {
+    @Test(expected = org.springframework.web.util.NestedServletException.class)
+    public void findEmployee_whenNotExists_shouldThrowException() throws Exception {
         // Act & Assert
-        // Note: Currently returns 500 due to RuntimeException. 
+        // RuntimeException from service propagates as NestedServletException through MockMvc.
         // Consider adding proper exception handling for 404.
-        mockMvc.perform(get("/api/employees/{id}", 99999))
-                .andExpect(status().isInternalServerError());
+        mockMvc.perform(get("/api/employees/{id}", 99999));
     }
 
     // ========== UPDATE EMPLOYEE INTEGRATION TESTS ==========
@@ -171,7 +172,8 @@ public class EmployeeIntegrationTest {
                 .andExpect(status().isOk());
 
         // Assert
-        Employee updated = employeeRepository.findById(saved.getEmployeeId()).orElseThrow();
+        Employee updated = employeeRepository.findById(saved.getEmployeeId())
+                .orElseThrow();
         assertEquals("Johnny", updated.getFirstName());
         assertEquals("Updated", updated.getLastName());
         assertEquals("johnny@example.com", updated.getEmailAddress());
